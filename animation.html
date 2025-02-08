@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Webpage</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease; /* Transition on hover */
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05); /* Transition on hover */
+        }
+
+        .box {
+            width: 100px;
+            height: 100px;
+            background-color: lightblue;
+            margin: 20px;
+            transition: background-color 0.3s ease, transform 0.2s ease; /* Transition on focus */
+        }
+
+        .box:focus {
+            background-color: lightcoral;
+            transform: rotate(45deg); /* Transition on focus */
+            outline: none; /* remove default focus outline */
+        }
+        
+        .banner {
+            width: 300px;
+            height: 50px;
+            background-color: #f0ad4e;
+            animation: slide 5s linear infinite; /* Animation */
+            margin-bottom: 20px;
+        }
+
+        @keyframes slide {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #007bff;
+            border-top: 5px solid transparent;
+            border-radius: 50%;
+            animation: rotate 1s linear infinite; /* Animation */
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .modal {
+            display: none; /* Initially hidden */
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+        }
+        .modal.show { /* Class to trigger animation */
+            display: block; /* Show the modal */
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .hidden {
+            opacity: 0;
+        }
+
+        .animated-card {
+            width: 200px;
+            height: 100px;
+            background-color: #4CAF50; /* Green */
+            transition: transform 0.5s;
+            margin-top: 20px;
+        }
+
+        .animated-card.animate {
+            transform: translateX(100px); /* Move to the right */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <button class="button">Click Me</button>
+        <input type="text" class="box" placeholder="Focus Me">
+
+        <div class="banner">Animated Banner</div>
+        <div class="spinner"></div>
+
+        <button id="openModalBtn" class="button">Open Modal</button>
+        <div id="myModal" class="modal">
+            <p>This is a modal!</p>
+            <button id="closeModalBtn" class="button">Close</button>
+        </div>
+
+        <div class="animated-card" id="myCard">Click to Animate</div>
+    </div>
+
+
+    <script>
+        // Function with parameters and return value
+        function calculateArea(width, height) {
+            return width * height;
+        }
+
+        let rectWidth = 10;
+        let rectHeight = 5;
+        let area = calculateArea(rectWidth, rectHeight);
+        console.log("Area:", area);
+
+
+        // Function demonstrating scope
+        let globalVar = "I'm global";
+
+        function myFunction() {
+            let localVar = "I'm local";
+            console.log(globalVar); // Accessing global variable
+            console.log(localVar);  // Accessing local variable
+        }
+
+        myFunction();
+        console.log(globalVar); // Accessing global variable
+        // console.log(localVar);  // Error: localVar is not defined here (outside its scope)
+
+
+        // Function to toggle a CSS class
+        function toggleClass(element, className) {
+            element.classList.toggle(className);
+        }
+
+        const modal = document.getElementById("myModal");
+        const openModalBtn = document.getElementById("openModalBtn");
+        const closeModalBtn = document.getElementById("closeModalBtn");
+
+        openModalBtn.addEventListener("click", () => {
+          toggleClass(modal, "show");
+        });
+
+        closeModalBtn.addEventListener("click", () => {
+          toggleClass(modal, "show");
+        });
+
+
+
+        // Combining CSS animations with JavaScript
+        const animatedCard = document.getElementById("myCard");
+
+        animatedCard.addEventListener("click", () => {
+            animatedCard.classList.toggle("animate");
+
+            // Resetting the animation (optional - depends on how you want it to behave)
+            // animatedCard.addEventListener("transitionend", () => {
+            //     animatedCard.classList.remove("animate");
+            // }, { once: true }); // Remove the listener after it's executed once
+        });
+
+
+
+    </script>
+
+</body>
+</html>
